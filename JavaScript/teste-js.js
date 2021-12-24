@@ -77,10 +77,40 @@ const pessoas = [
 ];
 
 // TODO implementar função assíncrona e anônima separarPorIdade
+async function separarPorIdade(pessoas){
+  var par = 0;
+  var impar = 0;
+  var nomesPar = [];
+  var nomesImpar = [];
+
+  pessoas.map(function(pessoa, i){
+    if(pessoa['idade'] % 2 == 0){ //verifica se a idade é par
+      par++; //conta como pessoa com idade par
+      nomesPar.push(pessoa['nome']); // adiciona nome no array
+    }
+
+    if(pessoa['idade'] % 2 == 1){ 
+      impar++;
+      nomesImpar.push(pessoa['nome']);
+    }
+  });
+  var resposta = {
+    par: par,
+    impar: impar,
+    nomesPar: nomesPar.sort(),
+    nomesImpar: nomesImpar.sort()
+  };
+  return resposta;
+
+}
 
 separarPorIdade(pessoas).then((resposta) => {
   // TODO imprimir no console a quantidade de nomes de pessoas com idade par. Saída esperada: 7
+  console.log('quantidade de pessoas com idade par: ' + resposta['par']);
   // TODO imprimir no console a quantidade de nomes de pessoas com idade impar. Saída esperada: 7
+  console.log('quantidade de pessoas com idade impar: ' + resposta['impar']);
   // TODO imprimir no console a os nomes de pessoas com idade par ordenados alfabeticamente. Saída esperada: ['Adriana', 'Bruno', 'Claudio', 'Flavia', 'Jaison', 'Marcia', 'Rafael']
+  console.log(resposta['nomesPar']);
   // TODO imprimir no console a os nomes de pessoas com idade ímpar ordenados alfabeticamente. Saída esperada: ['Ambrosina', 'André', 'Brenda', 'Carlinhos', 'Edenilson', 'José', 'Nivea']
+  console.log(resposta['nomesImpar']);
 });
